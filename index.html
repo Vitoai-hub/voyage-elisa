@@ -4,328 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Destination 01</title>
+<title>Destination</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: #080808;
-    color: #f4efe5;
-}
-
 body {
-    overflow: hidden;
-    font-family: Georgia, "Times New Roman", serif;
-}
-
-.screen {
-    position: fixed;
-    inset: 0;
-
+    margin: 0;
+    height: 100vh;
+    background: #090909;
+    color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: Arial, sans-serif;
+}
 
+.container {
     text-align: center;
-    padding: 30px;
 }
 
-
-/* =========================
-   INTRO
-========================= */
-
-#intro {
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #333;
+    border-top: 4px solid #c5a15a;
+    border-radius: 50%;
+    margin: auto;
+    animation: spin 1s linear infinite;
 }
 
-.kicker {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #b9965b;
-
-    opacity: 0;
-    transform: translateY(10px);
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
-}
-
-.intro-text {
-    margin-top: 28px;
-
-    font-size: 21px;
-    line-height: 1.6;
-
-    opacity: 0;
-    transform: translateY(10px);
-
-    transition:
-        opacity 1.7s ease,
-        transform 1.7s ease;
-}
-
-
-/* =========================
-   DESTINATION
-========================= */
-
-#destination {
-    pointer-events: none;
-}
-
-.number {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: #b9965b;
-
-    opacity: 0;
-    transform: translateY(8px);
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
-}
-
-.city {
-    margin: 25px 0 0;
-
-    font-size: clamp(55px, 17vw, 100px);
+#venise {
+    display: none;
+    font-family: Georgia, serif;
+    font-size: 60px;
+    letter-spacing: 8px;
     font-weight: normal;
-
-    opacity: 0;
-    filter: blur(16px);
-
-    letter-spacing: 22px;
-    transform: scale(.94);
-
-    transition:
-        opacity 3.5s ease,
-        filter 3.5s ease,
-        letter-spacing 3.5s ease,
-        transform 3.5s ease;
 }
 
-.gold-line {
-    height: 1px;
-    width: 0;
-
-    margin: 28px auto;
-
-    background: #b9965b;
-
-    transition: width 1.5s ease;
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
-
-.date {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-
-    opacity: 0;
-    transform: translateY(8px);
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
-}
-
-.final-text {
-    margin-top: 38px;
-
-    font-size: 17px;
-    line-height: 1.7;
-
-    opacity: 0;
-    transform: translateY(10px);
-
-    transition:
-        opacity 2s ease,
-        transform 2s ease;
-}
-
-.heart {
-    margin-top: 28px;
-
-    font-size: 21px;
-
-    opacity: 0;
-
-    transition: opacity 2s ease;
-}
-
-
-/* =========================
-   ACTIVE STATES
-========================= */
-
-.show {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-.hide-intro {
-    opacity: 0 !important;
-    transform: scale(1.03) !important;
-}
-
-.reveal-city {
-    opacity: 1 !important;
-
-    filter: blur(0) !important;
-
-    letter-spacing: 8px !important;
-
-    transform: scale(1) !important;
-
-    text-shadow:
-        0 0 35px rgba(185,150,91,.22);
-}
-
-.draw-line {
-    width: 75px !important;
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="container">
 
-<!-- INTRO -->
+    <div id="loader" class="loader"></div>
 
-<div id="intro" class="screen">
-
-    <div id="kicker" class="kicker">
-        5 ANS · 17 JOURS · 2 SACS À DOS
-    </div>
-
-    <div id="introText" class="intro-text">
-        Tu voulais savoir où tout commence…
-    </div>
-
-</div>
-
-
-<!-- DESTINATION -->
-
-<div id="destination" class="screen">
-
-    <div id="number" class="number">
-        DESTINATION 01
-    </div>
-
-    <h1 id="city" class="city">
+    <div id="venise">
         VENISE
-    </h1>
-
-    <div id="line" class="gold-line"></div>
-
-    <div id="date" class="date">
-        11 SEPTEMBRE 2026
-    </div>
-
-    <div id="finalText" class="final-text">
-        Ton voyage commence ici.<br>
-        La suite ne t'appartient toujours pas.
-    </div>
-
-    <div id="heart" class="heart">
-        ❤️
     </div>
 
 </div>
-
 
 <script>
-
-const kicker = document.getElementById("kicker");
-const introText = document.getElementById("introText");
-const intro = document.getElementById("intro");
-
-const number = document.getElementById("number");
-const city = document.getElementById("city");
-const line = document.getElementById("line");
-const date = document.getElementById("date");
-const finalText = document.getElementById("finalText");
-const heart = document.getElementById("heart");
-
-
-/* INTRO */
-
-setTimeout(() => {
-    kicker.classList.add("show");
-}, 400);
-
-setTimeout(() => {
-    introText.classList.add("show");
-}, 1800);
-
-
-/* disparition intro */
-
-setTimeout(() => {
-    intro.classList.add("hide-intro");
-}, 4800);
-
-
-/* DESTINATION 01 */
-
-setTimeout(() => {
-    number.classList.add("show");
-}, 6200);
-
-
-/* VENISE */
-
-setTimeout(() => {
-    city.classList.add("reveal-city");
-}, 7300);
-
-
-/* ligne */
-
-setTimeout(() => {
-    line.classList.add("draw-line");
-}, 10300);
-
-
-/* date */
-
-setTimeout(() => {
-    date.classList.add("show");
-}, 10800);
-
-
-/* phrase finale */
-
-setTimeout(() => {
-    finalText.classList.add("show");
-}, 12100);
-
-
-/* coeur */
-
-setTimeout(() => {
-    heart.classList.add("show");
-}, 13700);
-
+setTimeout(function() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("venise").style.display = "block";
+}, 3000);
 </script>
-
 
 </body>
 </html>
