@@ -3,99 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Destination</title>
+
+<title>Destination 01</title>
 
 <style>
-* { box-sizing: border-box; }
 
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background: #090909;
+    height: 100%;
+    background: #080808;
     color: #f4efe5;
+}
+
+body {
+    overflow: hidden;
     font-family: Georgia, "Times New Roman", serif;
 }
 
 .screen {
-    position: absolute;
+    position: fixed;
     inset: 0;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     text-align: center;
     padding: 30px;
 }
 
-/* ----- INTRO ----- */
 
-.intro {
-    animation: introDisappear 1.5s ease forwards;
-    animation-delay: 4.5s;
+/* =========================
+   INTRO
+========================= */
+
+#intro {
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
 }
 
-.intro-small {
+.kicker {
     font-family: Arial, sans-serif;
     font-size: 11px;
-    letter-spacing: 5px;
-    color: #b99558;
+    letter-spacing: 4px;
+    color: #b9965b;
+
     opacity: 0;
-    animation: fadeIn 1.5s ease forwards;
-    animation-delay: .5s;
+    transform: translateY(10px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
 }
 
 .intro-text {
-    margin-top: 25px;
+    margin-top: 28px;
+
     font-size: 21px;
     line-height: 1.6;
+
     opacity: 0;
-    animation: fadeIn 1.8s ease forwards;
-    animation-delay: 1.8s;
+    transform: translateY(10px);
+
+    transition:
+        opacity 1.7s ease,
+        transform 1.7s ease;
 }
 
 
-/* ----- DESTINATION ----- */
+/* =========================
+   DESTINATION
+========================= */
 
-.destination {
-    opacity: 0;
-    animation: destinationAppear 2s ease forwards;
-    animation-delay: 6s;
+#destination {
+    pointer-events: none;
 }
 
 .number {
     font-family: Arial, sans-serif;
     font-size: 10px;
     letter-spacing: 5px;
-    color: #b99558;
+    color: #b9965b;
+
     opacity: 0;
-    animation: fadeIn 1.5s ease forwards;
-    animation-delay: 6.5s;
+    transform: translateY(8px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
 }
 
-h1 {
-    margin: 22px 0 0;
+.city {
+    margin: 25px 0 0;
+
+    font-size: clamp(55px, 17vw, 100px);
     font-weight: normal;
-    font-size: clamp(55px, 18vw, 100px);
-    letter-spacing: 8px;
 
     opacity: 0;
-    filter: blur(15px);
+    filter: blur(16px);
+
+    letter-spacing: 22px;
     transform: scale(.94);
 
-    animation: revealCity 3.5s ease forwards;
-    animation-delay: 7.5s;
+    transition:
+        opacity 3.5s ease,
+        filter 3.5s ease,
+        letter-spacing 3.5s ease,
+        transform 3.5s ease;
 }
 
-.line {
-    width: 0;
+.gold-line {
     height: 1px;
-    margin: 25px auto;
-    background: #b99558;
+    width: 0;
 
-    animation: drawLine 1.5s ease forwards;
-    animation-delay: 10.5s;
+    margin: 28px auto;
+
+    background: #b9965b;
+
+    transition: width 1.5s ease;
 }
 
 .date {
@@ -104,110 +136,196 @@ h1 {
     letter-spacing: 4px;
 
     opacity: 0;
-    animation: fadeIn 1.5s ease forwards;
-    animation-delay: 11s;
+    transform: translateY(8px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
 }
 
-.final {
-    margin-top: 40px;
+.final-text {
+    margin-top: 38px;
+
     font-size: 17px;
     line-height: 1.7;
 
     opacity: 0;
-    animation: fadeIn 2s ease forwards;
-    animation-delay: 12.5s;
+    transform: translateY(10px);
+
+    transition:
+        opacity 2s ease,
+        transform 2s ease;
 }
 
 .heart {
-    margin-top: 30px;
+    margin-top: 28px;
+
+    font-size: 21px;
+
     opacity: 0;
-    animation: fadeIn 2s ease forwards;
-    animation-delay: 14s;
+
+    transition: opacity 2s ease;
 }
 
 
-/* ----- ANIMATIONS ----- */
+/* =========================
+   ACTIVE STATES
+========================= */
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
-@keyframes introDisappear {
-    to {
-        opacity: 0;
-        transform: scale(1.03);
-        visibility: hidden;
-    }
+.hide-intro {
+    opacity: 0 !important;
+    transform: scale(1.03) !important;
 }
 
-@keyframes destinationAppear {
-    to { opacity: 1; }
+.reveal-city {
+    opacity: 1 !important;
+
+    filter: blur(0) !important;
+
+    letter-spacing: 8px !important;
+
+    transform: scale(1) !important;
+
+    text-shadow:
+        0 0 35px rgba(185,150,91,.22);
 }
 
-@keyframes revealCity {
-    0% {
-        opacity: 0;
-        filter: blur(15px);
-        letter-spacing: 20px;
-        transform: scale(.94);
-    }
-
-    100% {
-        opacity: 1;
-        filter: blur(0);
-        letter-spacing: 8px;
-        transform: scale(1);
-        text-shadow: 0 0 35px rgba(185,149,88,.18);
-    }
-}
-
-@keyframes drawLine {
-    to { width: 75px; }
+.draw-line {
+    width: 75px !important;
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- INTRO -->
-<div class="screen intro">
 
-    <div class="intro-small">
+<!-- INTRO -->
+
+<div id="intro" class="screen">
+
+    <div id="kicker" class="kicker">
         5 ANS · 17 JOURS · 2 SACS À DOS
     </div>
 
-    <div class="intro-text">
+    <div id="introText" class="intro-text">
         Tu voulais savoir où tout commence…
     </div>
 
 </div>
 
 
-<!-- RÉVÉLATION -->
-<div class="screen destination">
+<!-- DESTINATION -->
 
-    <div class="number">
+<div id="destination" class="screen">
+
+    <div id="number" class="number">
         DESTINATION 01
     </div>
 
-    <h1>VENISE</h1>
+    <h1 id="city" class="city">
+        VENISE
+    </h1>
 
-    <div class="line"></div>
+    <div id="line" class="gold-line"></div>
 
-    <div class="date">
+    <div id="date" class="date">
         11 SEPTEMBRE 2026
     </div>
 
-    <div class="final">
+    <div id="finalText" class="final-text">
         Ton voyage commence ici.<br>
         La suite ne t'appartient toujours pas.
     </div>
 
-    <div class="heart">❤️</div>
+    <div id="heart" class="heart">
+        ❤️
+    </div>
 
 </div>
+
+
+<script>
+
+const kicker = document.getElementById("kicker");
+const introText = document.getElementById("introText");
+const intro = document.getElementById("intro");
+
+const number = document.getElementById("number");
+const city = document.getElementById("city");
+const line = document.getElementById("line");
+const date = document.getElementById("date");
+const finalText = document.getElementById("finalText");
+const heart = document.getElementById("heart");
+
+
+/* INTRO */
+
+setTimeout(() => {
+    kicker.classList.add("show");
+}, 400);
+
+setTimeout(() => {
+    introText.classList.add("show");
+}, 1800);
+
+
+/* disparition intro */
+
+setTimeout(() => {
+    intro.classList.add("hide-intro");
+}, 4800);
+
+
+/* DESTINATION 01 */
+
+setTimeout(() => {
+    number.classList.add("show");
+}, 6200);
+
+
+/* VENISE */
+
+setTimeout(() => {
+    city.classList.add("reveal-city");
+}, 7300);
+
+
+/* ligne */
+
+setTimeout(() => {
+    line.classList.add("draw-line");
+}, 10300);
+
+
+/* date */
+
+setTimeout(() => {
+    date.classList.add("show");
+}, 10800);
+
+
+/* phrase finale */
+
+setTimeout(() => {
+    finalText.classList.add("show");
+}, 12100);
+
+
+/* coeur */
+
+setTimeout(() => {
+    heart.classList.add("show");
+}, 13700);
+
+</script>
+
 
 </body>
 </html>
